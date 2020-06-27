@@ -34,10 +34,13 @@ namespace PuzzleFifteen
             {
                 for(int col = 1; col < 5; col++)
                 {
-                    block = new PuzzleBlock();
-                    block.Top = row * 84;
-                    block.Left = col * 84;
-                    block.Text = blockCount.ToString();
+                    block = new PuzzleBlock()                     
+                    {
+                        Top = row * 84,
+                        Left = col * 84,
+                        Text = blockCount.ToString()
+                    };
+                    
                     if(blockCount == 16)
                     {
                         block.Text = string.Empty;
