@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -38,7 +39,8 @@ namespace PuzzleFifteen
                     {
                         Top = row * 84,
                         Left = col * 84,
-                        Text = blockCount.ToString()                        
+                        Text = blockCount.ToString(),
+                        Name = "Block" + blockCount.ToString()
                     };
 
                     //block.Click += new EventHandler(Block_Click);
@@ -61,12 +63,15 @@ namespace PuzzleFifteen
         private void Block_Click(object sender, EventArgs e)
         {
             Button block = (Button)sender;
-            MessageBox.Show(block.Name);
+            SwapBlocks(block);
         }
 
         private void SwapBlocks(Button block)
         {
             Button emptyBlock = (Button)this.Controls["EmptyBlock"];
+            Point oldLocation = block.Location;
+            block.Location = emptyBlock.Location;
+            emptyBlock.Location = oldLocation;
         }
 
     }
