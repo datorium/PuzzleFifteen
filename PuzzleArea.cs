@@ -34,15 +34,19 @@ namespace PuzzleFifteen
             {
                 for(int col = 1; col < 5; col++)
                 {
-                    block = new PuzzleBlock()                     
+                    block = new PuzzleBlock()
                     {
                         Top = row * 84,
                         Left = col * 84,
-                        Text = blockCount.ToString()
+                        Text = blockCount.ToString()                        
                     };
+
+                    //block.Click += new EventHandler(Block_Click);
+                    block.Click += Block_Click;
                     
                     if(blockCount == 16)
                     {
+                        block.Name = "EmptyBlock";
                         block.Text = string.Empty;
                         block.BackColor = Color.DarkSlateBlue;
                         block.FlatStyle = FlatStyle.Flat;
@@ -54,8 +58,16 @@ namespace PuzzleFifteen
             }
         }
 
+        private void Block_Click(object sender, EventArgs e)
+        {
+            Button block = (Button)sender;
+            MessageBox.Show(block.Name);
+        }
 
-
+        private void SwapBlocks(Button block)
+        {
+            Button emptyBlock = (Button)this.Controls["EmptyBlock"];
+        }
 
     }
 }
