@@ -63,7 +63,10 @@ namespace PuzzleFifteen
         private void Block_Click(object sender, EventArgs e)
         {
             Button block = (Button)sender;
-            SwapBlocks(block);
+            if (IsAdjacent(block))
+            {
+                SwapBlocks(block);
+            }            
         }
 
         private void SwapBlocks(Button block)
@@ -72,6 +75,26 @@ namespace PuzzleFifteen
             Point oldLocation = block.Location;
             block.Location = emptyBlock.Location;
             emptyBlock.Location = oldLocation;
+        }
+
+        private bool IsAdjacent(Button block)
+        {
+            double a;
+            double b;
+            double c;
+            Button emptyBlock = (Button)this.Controls["EmptyBlock"];
+
+            a = Math.Abs(emptyBlock.Top - block.Top);
+            b = Math.Abs(emptyBlock.Left - block.Left);
+            c = Math.Sqrt(Math.Pow(a, 2) + Math.Pow(b, 2));
+            if(c < 85)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
     }
