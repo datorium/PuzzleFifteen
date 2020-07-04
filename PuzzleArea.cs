@@ -13,11 +13,14 @@ namespace PuzzleFifteen
 {
     public partial class PuzzleArea : Form
     {
+        Random rand = new Random();
+
         public PuzzleArea()
         {
             InitializeComponent();
             InitializePuzzleArea();
             InitializeBlocks();
+            ShuffleBlocks();
         }
 
         private void InitializePuzzleArea()
@@ -97,5 +100,19 @@ namespace PuzzleFifteen
             }
         }
 
+        private void ShuffleBlocks()
+        {
+            int randNumber;
+            string blockName;
+            Button block;
+
+            for(int i = 0; i < 100; i++)
+            {
+                randNumber = rand.Next(1, 16);
+                blockName = "Block" + randNumber.ToString();
+                block = (Button)this.Controls[blockName];
+                SwapBlocks(block);
+            }
+        }
     }
 }
