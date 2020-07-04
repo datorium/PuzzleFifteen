@@ -146,5 +146,9 @@ namespace PuzzleFifteen
             MessageBox.Show("You solved that!");
         }
 
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
