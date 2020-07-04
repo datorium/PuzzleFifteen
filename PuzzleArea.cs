@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace PuzzleFifteen
     public partial class PuzzleArea : Form
     {
         Random rand = new Random();
+        List<Point> initialLocations = new List<Point>();
 
         public PuzzleArea()
         {
@@ -48,6 +50,7 @@ namespace PuzzleFifteen
 
                     //block.Click += new EventHandler(Block_Click);
                     block.Click += Block_Click;
+                    initialLocations.Add(block.Location);
                     
                     if(blockCount == 16)
                     {
@@ -69,6 +72,7 @@ namespace PuzzleFifteen
             if (IsAdjacent(block))
             {
                 SwapBlocks(block);
+                CheckForWin();
             }            
         }
 
@@ -119,5 +123,28 @@ namespace PuzzleFifteen
         {
             ShuffleBlocks();
         }
+
+        private void CheckForWin()
+        {
+            string blockName;
+            Button block;
+
+            for(int i = 1; i < 16; i++)
+            {
+                blockName = "Block" + i.ToString();
+                block = (Button)this.Controls[blockName];
+                if(block.Location != initialLocations[i - 1])
+                {
+                    return;
+                }                
+            }
+            PuzzleSolved();
+        }
+
+        private void PuzzleSolved()
+        {
+            MessageBox.Show("You solved that!");
+        }
+
     }
 }
